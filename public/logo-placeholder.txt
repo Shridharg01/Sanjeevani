@@ -1,0 +1,16 @@
+LOGO UPLOAD INSTRUCTIONS
+========================
+
+To use your Sanjeevani Cos Derma brand logo:
+
+1. DOWNLOAD the logo from: https://images.app.goo.gl/6WS6X2cePri6iWbf6
+2. SAVE the image file as "logo.png" (or "logo.jpg" if it's a JPEG)
+3. UPLOAD the file to this /public/ folder
+4. DELETE this placeholder file
+5. The website will automatically use your brand logo!
+
+Supported formats: PNG, JPG, SVG, WebP
+Recommended size: 200x200px or larger
+File name: logo.png (exactly)
+
+The website is already configured to automatically detect and use your logo once uploaded.

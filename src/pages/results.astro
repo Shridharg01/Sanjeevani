@@ -1,0 +1,352 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ResultCard from '../components/ResultCard.astro';
+import SuccessStoryCard from '../components/SuccessStoryCard.astro';
+
+// Import data from the easy-to-update data file
+import { 
+  getAllResults, 
+  successStories, 
+  filterCategories, 
+  heroStats 
+} from '../data/results.js';
+
+// Get all results for the page
+const allResults = getAllResults();
+---
+
+<Layout 
+  title="Hair Transplant Results - Sanjeevani Cos Derma | Before & After Gallery Bangalore"
+  description="View amazing hair transplant results from Sanjeevani Cos Derma, Bangalore. Real before & after photos of FUE, Pen-Implanter hair transplant and skin treatments."
+  keywords="hair transplant results bangalore, before after hair transplant, FUE results bangalore, pen implanter results, hair transplant photos bangalore"
+>
+  <Header />
+
+  <main id="main-content" role="main">
+    <section class="results-hero section">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Amazing Hair Transplant Results</h1>
+          <p class="hero-subtitle">
+            See the incredible transformations achieved by our patients at Sanjeevani Cos Derma, Bangalore's premier hair transplant clinic.
+          </p>
+          <div class="hero-stats">
+            {heroStats.map(stat => (
+              <div class="stat-item">
+                <div class="stat-number">{stat.number}</div>
+                <div class="stat-label">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="results-gallery section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Before & After Gallery</h2>
+          <p class="section-subtitle">
+            Real results from real patients. All photos are unedited and taken at our clinic with patient consent.
+          </p>
+        </div>
+        
+        <div class="filter-tabs">
+          {filterCategories.map(category => (
+            <button 
+              class={`filter-btn ${category.active ? 'active' : ''}`} 
+              data-filter={category.id}
+            >
+              {category.label}
+            </button>
+          ))}
+        </div>
+        
+        <div class="results-grid">
+          {allResults.map(result => (
+            <ResultCard result={result} />
+          ))}
+        </div>
+        
+        <div class="load-more">
+          <button class="btn btn-secondary">View More Results</button>
+        </div>
+      </div>
+    </section>
+    
+    <section class="success-stories section bg-neutral-50">
+      <div class="container">
+        <h2 class="section-title">Patient Success Stories</h2>
+        <div class="stories-grid">
+          {successStories.map(story => (
+            <SuccessStoryCard story={story} />
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <section class="results-cta section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready to See Your Own Amazing Results?</h2>
+          <p>Book a free consultation and let our experts create a personalized treatment plan for you.</p>
+          <div class="cta-actions">
+            <a href="/contact" class="btn btn-primary btn-large">Book Free Consultation</a>
+            <a href="https://wa.me/918296280340" class="btn btn-whatsapp btn-large" target="_blank">WhatsApp Expert</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .results-hero {
+    background: linear-gradient(135deg, var(--neutral-50) 0%, var(--neutral-100) 100%);
+    padding: var(--space-24) 0 var(--space-20);
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--neutral-900);
+    margin-bottom: var(--space-5);
+    font-family: var(--font-display);
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--neutral-600);
+    max-width: 600px;
+    margin: 0 auto var(--space-10);
+    line-height: 1.6;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-16);
+    margin-top: var(--space-10);
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-600);
+    font-family: var(--font-display);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--neutral-600);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .results-gallery {
+    background: white;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+  }
+
+  .filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-5);
+    margin-bottom: var(--space-12);
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: var(--space-3) var(--space-6);
+    border: 2px solid var(--neutral-300);
+    background: white;
+    color: var(--neutral-600);
+    border-radius: var(--radius-2xl);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-size: 0.95rem;
+  }
+
+  .filter-btn.active,
+  .filter-btn:hover {
+    background: var(--primary-600);
+    color: white;
+    border-color: var(--primary-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--space-10);
+    margin-bottom: var(--space-12);
+  }
+
+  .load-more {
+    text-align: center;
+  }
+
+  .success-stories {
+    background: var(--neutral-50);
+  }
+
+  .stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .results-cta {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-5);
+    font-family: var(--font-display);
+  }
+
+  .cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-8);
+    opacity: 0.9;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: var(--space-5);
+    justify-content: center;
+  }
+
+  @media (max-width: 1024px) {
+    .results-grid {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--space-8);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero-stats {
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+    
+    .filter-tabs {
+      gap: var(--space-3);
+    }
+    
+    .filter-btn {
+      padding: var(--space-2) var(--space-4);
+      font-size: 0.9rem;
+    }
+    
+    .results-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    
+    .cta-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .cta-content h2 {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.125rem;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  // Filter functionality
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const resultCards = document.querySelectorAll('.result-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      filterBtns.forEach(b => b.classList.remove('active'));
+      // Add active class to clicked button
+      btn.classList.add('active');
+      
+      const filter = btn.getAttribute('data-filter');
+      
+      resultCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'block';
+          card.style.animation = 'fadeInUp 0.5s ease-out';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Load more functionality
+  const loadMoreBtn = document.querySelector('.load-more .btn');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      // In a real implementation, this would load more results
+      const message = `More results available! Contact us to see additional transformations:
+      
+📞 Call: +91 82962 80340
+💬 WhatsApp: https://wa.me/918296280340
+📍 Visit: Rajajinagar, Bangalore`;
+      
+      alert(message);
+    });
+  }
+
+  // Add fade-in animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+</script>

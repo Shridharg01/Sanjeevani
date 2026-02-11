@@ -1,0 +1,159 @@
+---
+// Result Card Component - Reusable component for displaying individual results
+export interface Props {
+  result: {
+    id: number;
+    title: string;
+    category: string;
+    beforeImage: string;
+    afterImage: string;
+    patientAge: string;
+    technique: string;
+    grafts?: string;
+    sessions?: string;
+    timeline: string;
+    description: string;
+    featured?: boolean;
+  };
+}
+
+const { result } = Astro.props;
+---
+
+<div class="result-card" data-category={result.category}>
+  <div class="result-images">
+    <div class="image-container">
+      <img src={result.beforeImage} alt={`${result.title} - Before and After`} loading="lazy" />
+    </div>
+  </div>
+  <div class="result-info">
+    <h3>{result.title}</h3>
+    <div class="patient-details">
+      <div class="detail-item">
+        <span class="label">Age:</span>
+        <span class="value">{result.patientAge}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Technique:</span>
+        <span class="value">{result.technique}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">{result.grafts ? 'Grafts:' : 'Sessions:'}</span>
+        <span class="value">{result.grafts || result.sessions}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Timeline:</span>
+        <span class="value">{result.timeline}</span>
+      </div>
+    </div>
+    <p class="result-description">{result.description}</p>
+    {result.featured && (
+      <div class="featured-badge">
+        <span>⭐ Featured Result</span>
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .result-card {
+    background: white;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+  }
+
+  .result-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-2xl);
+    border-color: var(--primary-200);
+  }
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .result-card:hover .image-container img {
+    transform: scale(1.05);
+  }
+
+  .result-info {
+    padding: var(--space-8);
+  }
+
+  .result-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--neutral-900);
+    margin-bottom: var(--space-4);
+    font-family: var(--font-display);
+  }
+
+  .patient-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    padding: var(--space-4);
+    background: var(--neutral-50);
+    border-radius: var(--radius-lg);
+  }
+
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+
+  .label {
+    color: var(--neutral-600);
+    font-weight: 500;
+  }
+
+  .value {
+    color: var(--neutral-900);
+    font-weight: 600;
+  }
+
+  .result-description {
+    color: var(--neutral-600);
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: var(--space-4);
+  }
+
+  .featured-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
+    color: white;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-2xl);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 768px) {
+    .patient-details {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+    
+    .result-info {
+      padding: var(--space-6);
+    }
+  }
+
+</style>

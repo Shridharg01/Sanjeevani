@@ -1,0 +1,59 @@
+# Robots.txt for Sanjeevani Cos Derma
+# Website: https://sanjeevanicosderma.in
+# Medical Clinic - Hair Transplant & Skin Treatments in Bangalore
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://sanjeevanicosderma.in/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Allow all search engines and AI crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# Disallow only admin or private areas if any exist
+# Currently allowing all paths for maximum visibility

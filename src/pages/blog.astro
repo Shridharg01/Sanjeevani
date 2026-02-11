@@ -1,0 +1,645 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BlogCard from '../components/BlogCard.astro';
+
+// Import blog data
+import { 
+  getAllBlogPosts, 
+  getFeaturedPosts, 
+  getBlogCategories,
+  getRecentPosts 
+} from '../data/blog.js';
+
+const allPosts = getAllBlogPosts();
+const featuredPosts = getFeaturedPosts();
+const categories = getBlogCategories();
+const recentPosts = getRecentPosts();
+---
+
+<Layout 
+  title="Hair Transplant Blog - Expert Tips & Insights | Sanjeevani Cos Derma Bangalore"
+  description="Read expert insights on hair transplant, hair loss treatment, and skin care from Bangalore's leading dermatologists. Latest trends, tips, and success stories."
+  keywords="hair transplant blog bangalore, hair loss treatment tips, best hair transplant surgeon bangalore, hair restoration blog, dermatology blog bangalore, hair care tips bangalore"
+>
+  <Header />
+
+  <main id="main-content" role="main">
+    <section class="blog-hero section">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Hair Transplant & Skin Care Blog</h1>
+          <p class="hero-subtitle">
+            Expert insights, latest trends, and success stories from Bangalore's premier hair transplant and skin clinic. 
+            Stay informed with tips from our experienced dermatologists.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">50+</div>
+              <div class="stat-label">Expert Articles</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">10K+</div>
+              <div class="stat-label">Monthly Readers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">500+</div>
+              <div class="stat-label">Success Stories</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="featured-posts section">
+      <div class="container">
+        <h2 class="section-title">Featured Articles</h2>
+        <div class="featured-grid">
+          {featuredPosts.map(post => (
+            <BlogCard post={post} featured={true} />
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <section class="blog-content section bg-neutral-50">
+      <div class="container">
+        <div class="blog-layout">
+          <div class="main-content">
+            <div class="content-header">
+              <h2>Latest Articles</h2>
+              <div class="category-filters">
+                {categories.map(category => (
+                  <button 
+                    class={`filter-btn ${category.active ? 'active' : ''}`} 
+                    data-filter={category.id}
+                  >
+                    {category.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div class="posts-grid">
+              {allPosts.map(post => (
+                <BlogCard post={post} />
+              ))}
+            </div>
+            
+            <div class="load-more">
+              <button class="btn btn-secondary">Load More Articles</button>
+            </div>
+          </div>
+          
+          <aside class="sidebar">
+            <div class="sidebar-widget">
+              <h3>Recent Posts</h3>
+              <div class="recent-posts">
+                {recentPosts.map(post => (
+                  <div class="recent-post">
+                    <img src={post.image} alt={post.title} loading="lazy" />
+                    <div class="recent-content">
+                      <h4>{post.title}</h4>
+                      <span class="post-date">{post.date}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div class="sidebar-widget">
+              <h3>Popular Categories</h3>
+              <div class="category-list">
+                <a href="#hair-transplant" class="category-link">
+                  <span>Hair Transplant</span>
+                  <span class="post-count">25</span>
+                </a>
+                <a href="#hair-loss" class="category-link">
+                  <span>Hair Loss Treatment</span>
+                  <span class="post-count">18</span>
+                </a>
+                <a href="#skin-care" class="category-link">
+                  <span>Skin Care</span>
+                  <span class="post-count">15</span>
+                </a>
+                <a href="#success-stories" class="category-link">
+                  <span>Success Stories</span>
+                  <span class="post-count">12</span>
+                </a>
+                <a href="#tips" class="category-link">
+                  <span>Hair Care Tips</span>
+                  <span class="post-count">10</span>
+                </a>
+              </div>
+            </div>
+            
+            <div class="sidebar-widget cta-widget">
+              <h3>Need Expert Advice?</h3>
+              <p>Get personalized hair and skin consultation from our expert dermatologists.</p>
+              <a href="/contact" class="btn btn-primary">Book Free Consultation</a>
+            </div>
+            
+            <div class="sidebar-widget">
+              <h3>Follow Us</h3>
+              <div class="social-links">
+                <a href="#" class="social-link">📘 Facebook</a>
+                <a href="#" class="social-link">📷 Instagram</a>
+                <a href="#" class="social-link">📺 YouTube</a>
+                <a href="#" class="social-link">🐦 Twitter</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+    
+    <section class="newsletter section">
+      <div class="container">
+        <div class="newsletter-content">
+          <h2>Stay Updated with Latest Hair Care Tips</h2>
+          <p>Subscribe to our newsletter for expert advice, treatment updates, and exclusive offers from Bangalore's leading hair transplant clinic.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <div class="newsletter-benefits">
+            <div class="benefit">✅ Weekly hair care tips</div>
+            <div class="benefit">✅ Treatment updates</div>
+            <div class="benefit">✅ Exclusive offers</div>
+            <div class="benefit">✅ Success stories</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .blog-hero {
+    background: linear-gradient(135deg, var(--neutral-50) 0%, var(--neutral-100) 100%);
+    padding: var(--space-24) 0 var(--space-20);
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--neutral-900);
+    margin-bottom: var(--space-5);
+    font-family: var(--font-display);
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--neutral-600);
+    max-width: 700px;
+    margin: 0 auto var(--space-10);
+    line-height: 1.6;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-16);
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-600);
+    font-family: var(--font-display);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--neutral-600);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .featured-posts {
+    background: white;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--space-10);
+  }
+
+  .blog-content {
+    background: var(--neutral-50);
+  }
+
+  .blog-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-16);
+  }
+
+  .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-12);
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .content-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--neutral-900);
+    font-family: var(--font-display);
+  }
+
+  .category-filters {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: var(--space-2) var(--space-4);
+    border: 2px solid var(--neutral-300);
+    background: white;
+    color: var(--neutral-600);
+    border-radius: var(--radius-2xl);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-size: 0.9rem;
+  }
+
+  .filter-btn.active,
+  .filter-btn:hover {
+    background: var(--primary-600);
+    color: white;
+    border-color: var(--primary-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-8);
+    margin-bottom: var(--space-12);
+  }
+
+  .load-more {
+    text-align: center;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .sidebar-widget {
+    background: white;
+    padding: var(--space-8);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--neutral-200);
+  }
+
+  .sidebar-widget h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--neutral-900);
+    margin-bottom: var(--space-6);
+    font-family: var(--font-display);
+  }
+
+  .recent-posts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .recent-post {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .recent-post img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    flex-shrink: 0;
+  }
+
+  .recent-content h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--neutral-900);
+    line-height: 1.4;
+    margin-bottom: var(--space-1);
+  }
+
+  .post-date {
+    font-size: 0.8rem;
+    color: var(--neutral-500);
+  }
+
+  .category-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .category-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3);
+    background: var(--neutral-50);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-normal);
+    color: var(--neutral-700);
+    font-weight: 500;
+  }
+
+  .category-link:hover {
+    background: var(--primary-50);
+    color: var(--primary-600);
+    transform: translateX(4px);
+  }
+
+  .post-count {
+    background: var(--neutral-300);
+    color: var(--neutral-700);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .category-link:hover .post-count {
+    background: var(--primary-200);
+    color: var(--primary-700);
+  }
+
+  .cta-widget {
+    background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+    color: white;
+    text-align: center;
+  }
+
+  .cta-widget h3 {
+    color: white;
+  }
+
+  .cta-widget p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--space-6);
+  }
+
+  .cta-widget .btn {
+    background: white;
+    color: var(--primary-600);
+    border: 2px solid white;
+  }
+
+  .cta-widget .btn:hover {
+    background: var(--primary-50);
+    transform: translateY(-2px);
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    padding: var(--space-3);
+    background: var(--neutral-50);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-normal);
+    color: var(--neutral-700);
+    font-weight: 500;
+  }
+
+  .social-link:hover {
+    background: var(--primary-50);
+    color: var(--primary-600);
+    transform: translateX(4px);
+  }
+
+  .newsletter {
+    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .newsletter-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: var(--space-5);
+    font-family: var(--font-display);
+  }
+
+  .newsletter-content p {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-8);
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    margin-bottom: var(--space-8);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: var(--space-4);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+  }
+
+  .newsletter-form input:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
+  .newsletter-benefits {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+  }
+
+  .benefit {
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 1024px) {
+    .blog-layout {
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+    
+    .featured-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+    
+    .posts-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero-stats {
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+    
+    .content-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .category-filters {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .newsletter-form {
+      flex-direction: column;
+    }
+    
+    .newsletter-benefits {
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+    
+    .sidebar-widget {
+      padding: var(--space-6);
+    }
+    
+    .newsletter-content h2 {
+      font-size: 2rem;
+    }
+    
+    .filter-btn {
+      padding: var(--space-2) var(--space-3);
+      font-size: 0.85rem;
+    }
+  }
+  // Filter functionality
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const blogCards = document.querySelectorAll('.blog-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      filterBtns.forEach(b => b.classList.remove('active'));
+      // Add active class to clicked button
+      btn.classList.add('active');
+      
+      const filter = btn.getAttribute('data-filter');
+      
+      blogCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = 'block';
+          card.style.animation = 'fadeInUp 0.5s ease-out';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Newsletter form
+  const newsletterForm = document.querySelector('.newsletter-form');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = this.querySelector('input[type="email"]').value;
+      
+      const message = `Thank you for subscribing! We'll send hair care tips and updates to ${email}.
+      
+For immediate consultation:
+📞 Call: +91 82962 80340
+💬 WhatsApp: https://wa.me/918296280340`;
+      
+      alert(message);
+      this.reset();
+    });
+  }
+
+  // Load more functionality
+  const loadMoreBtn = document.querySelector('.load-more .btn');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      const message = `More articles coming soon! 
+      
+For personalized hair care advice:
+📞 Call: +91 82962 80340
+💬 WhatsApp: https://wa.me/918296280340
+📍 Visit: Rajajinagar, Bangalore`;
+      
+      alert(message);
+    });
+  }
+
+  // Add fade-in animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
