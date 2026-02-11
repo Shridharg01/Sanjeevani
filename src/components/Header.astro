@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '../assets/logo.png';
 ---
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -11,8 +9,7 @@ import logo from '../assets/logo.png';
       <div class="logo">
         <a href="/" aria-label="Sanjeevani Cos Derma - Home">
           <div class="logo-icon">
-            <!-- Replace this with actual logo once uploaded -->
-            <Image src={logo} alt="Sanjeevani Cos Derma - Best Hair Transplant Clinic in Rajajinagar, Bangalore" width={50} height={50} class="brand-logo" />
+            <img src="/logo.png" alt="Sanjeevani Cos Derma - Best Hair Transplant Clinic in Rajajinagar, Bangalore" width="50" height="50" class="brand-logo" />
             <!-- Fallback SVG logo -->
             <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" class="fallback-logo" style="display: none;" aria-hidden="true">
               <title>Sanjeevani Cos Derma logo</title>
