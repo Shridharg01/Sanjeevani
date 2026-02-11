@@ -178,6 +178,11 @@
     transform: scale(1.05);
   }
 
+  .nav {
+    flex: 1;
+    min-width: 0;
+  }
+
   .nav-menu {
     display: flex;
     list-style: none;
@@ -186,6 +191,8 @@
     flex-wrap: nowrap;
     white-space: nowrap;
     overflow: hidden;
+    flex: 1;
+    min-width: 0;
   }
 
   .nav-link {
@@ -197,6 +204,10 @@
     border-radius: var(--radius-md);
     position: relative;
     white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .nav-link:hover {
